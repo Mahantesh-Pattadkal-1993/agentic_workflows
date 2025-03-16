@@ -2,3 +2,8 @@ langgraph==0.3.11
 streamlit==1.43.2
 openai==1.66.3
 python-dotenv
+PyMuPDF==1.25.4
+langchain==0.3.20
+qdrant-client
+langchain-community
+tiktoken

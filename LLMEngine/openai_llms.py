@@ -3,26 +3,30 @@ import os
 
 from dotenv import load_dotenv
 
-load_dotenv()
-# Set your OpenAI API key
+class OpenAIChatClient:
+    def __init__(self):
+        load_dotenv()
+        self.client = OpenAI(
+            api_key=os.environ.get("OPENAI_API_KEY"),
+        )
+
+    def get_chat_completion(self, messages):
+        completion = self.client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=messages,
+        )
+        return completion.choices[0].message.content
 
 
-
-client = OpenAI(
-    # This is the default and can be omitted
-    api_key=os.environ.get("OPENAI_API_KEY"),
-)
-
-
-completion = client.chat.completions.create(
-    model="gpt-4o-mini",
-    messages=[
-        {"role": "developer", "content": "Talk like a pirate."},
-        {
-            "role": "user",
-            "content": "How do I check if a Python object is an instance of a class?",
-        },
-    ],
-)
-
-print(completion.choices[0].message.content)
+# Usage example
+# if __name__ == "__main__":
+#     chat_client = OpenAIChatClient()
+#     messages = [
+#         {"role": "developer", "content": "Talk like a pirate."},
+#         {
+#             "role": "user",
+#             "content": "How do I check if a Python object is an instance of a class?",
+#         },
+#     ]
+#     response = chat_client.get_chat_completion(messages)
+#     print(response)
