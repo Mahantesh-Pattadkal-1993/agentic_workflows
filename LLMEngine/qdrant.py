@@ -4,7 +4,7 @@ from qdrant_client import QdrantClient
 from qdrant_client.http import models
 import uuid
 import os
-from pdf_reader import PDFReader  # Import our PDFReader class
+from .pdf_reader import PDFReader  # Import our PDFReader class
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -27,7 +27,7 @@ class QdrantDB:
             # Initialize attributes only once when the instance is first created
 
     
-            cls._instance.client = QdrantClient(qdrant_url="localhost", port=6333)
+            cls._instance.client = QdrantClient(url="localhost", port=6333)
             cls._instance.collection_name = "mantumanju"
             cls._instance.embedding_model = OpenAIEmbeddings()
         return cls._instance
